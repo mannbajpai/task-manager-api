@@ -1,7 +1,28 @@
 # Task Manager API
 
-Welcome to the Task Manager API documentation. This API provides endpoints to manage tasks and users in a task management application.
+Welcome to the Task Manager API documentation. This REST API provides endpoints to manage tasks and users in a task management application.
 
+## Getting Started
+- **Clone the repository**
+```bash
+git clone https://github.com/mannbajpai/task-manager-api
+```
+- **Get All the dependencies**
+```bash
+npm install
+```
+- **Set up your environment variables in .env**
+```
+DB_NAME=
+DB_USERNAME=
+DB_PASSWORD=
+JWT_SECRET=
+PORT=
+```
+- **Run the node app**
+```bash
+npm start
+```
 ## Routes
 
 ### User Registration
@@ -19,7 +40,8 @@ Welcome to the Task Manager API documentation. This API provides endpoints to ma
     ```json
     {
       "id": "1",
-      "username": "example_user"
+      "username": "example_user",
+      "password": "ntJZcTPavuwgjIC9MfwOVPxpIew3Bsdz" //Hashed Password
     }
     ```
 
@@ -37,7 +59,7 @@ Welcome to the Task Manager API documentation. This API provides endpoints to ma
   - Response:
     ```json
     {
-      "message": "Login successful"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImV4cCI6OF8DIVh82qgcq6bxDMBk"
     }
     ```
 
@@ -53,7 +75,7 @@ Welcome to the Task Manager API documentation. This API provides endpoints to ma
 ### Task Management
 
 - **GET /api/v1/tasks/**
-  - Description: Get all tasks for the authenticated user.
+  - Description: Get user's all tasks for the authenticated user.
   - Response:
     ```json
     [
@@ -115,7 +137,10 @@ Welcome to the Task Manager API documentation. This API provides endpoints to ma
   - Response:
     ```json
     {
-      "message": "Task updated successfully"
+        "id": updatedId,
+        "title": "Updated Task",
+        "description": "Updated Description of Task",
+        "userId": 13
     }
     ```
 
@@ -124,7 +149,7 @@ Welcome to the Task Manager API documentation. This API provides endpoints to ma
   - Response:
     ```json
     {
-      "message": "Task deleted successfully"
+        message:"Task deleted successfully" 
     }
     ```
 
@@ -137,3 +162,5 @@ npm test
 ```
 
 Make sure to have Jest and other required dependencies installed in your project before running the tests.
+
+**_NOTE:_**  As test run parallely there might be a case that PORT is already in use hence run the test individually.

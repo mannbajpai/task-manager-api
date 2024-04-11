@@ -3,7 +3,15 @@ import jwt from 'jsonwebtoken';
 
 const getAllTasks = async (req, res) => {
     try {
-        const tasks = await Task.findAll();
+        // Extract user ID from JWT token
+        const token = req.headers['authorization'];
+        const decoded = jwt.verify(token, 'secret');
+        const userId = decoded.userId;
+        const tasks = await Task.findAll({
+            where: {
+              userId: userId
+            }
+          });
         res.status(200).json(tasks);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -64,7 +72,7 @@ const deleteTask = async (req, res) => {
             return res.status(404).json({ message: 'Task not found' });
         }
         await task.destroy();
-        res.status(204).end();
+        res.status(200).json({message:'Task deleted successfully' }).end();
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

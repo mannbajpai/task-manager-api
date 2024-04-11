@@ -7,19 +7,19 @@ describe('User API Endpoints', () => {
         const res = await request(app)
             .post('/api/v1/users/register')
             .send({
-                "username": 'testuser101',
+                "username": 'test_user101',
                 "password": 'testpassword'
             });
         expect(res.statusCode).toEqual(201);
         expect(res.body).toHaveProperty('id');
-        expect(res.body.username).toEqual('testuser101');
+        expect(res.body.username).toEqual('test_user101');
     });
 
     it('should login with valid credentials', async () => {
         const res = await request(app)
             .post('/api/v1/auth/login')
             .send({
-                username: 'testuser2',
+                username: 'test_user101',
                 password: 'testpassword'
             });
         expect(res.statusCode).toEqual(200);
